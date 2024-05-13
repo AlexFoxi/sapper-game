@@ -1,0 +1,81 @@
+.board-wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.board {
+	display: grid;
+}
+
+.cell {
+	width: 3rem;
+	height: 3rem;
+	border: 1px solid #6d6d6d;
+	text-align: center;
+	line-height: 3rem;
+	cursor: pointer;
+	box-shadow: inset 0 0 0 0.05rem #ccc;
+	transition: all 0.3s ease;
+	background: #e7e7e7;
+}
+
+.cell.open {
+	background: #fff;
+	cursor: default;
+}
+
+.cell:hover {
+	box-shadow: inset 0 0 0 0.25rem #ccc;
+}
+
+.cell:active {
+	box-shadow: inset 0 0 0 0.35rem #ccc;
+}
+
+.game-settings {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	max-width: 35rem;
+	margin-bottom: 1rem;
+	gap: 0.5rem;
+}
+
+.game-settings input {
+	width: calc(50% - 0.5rem);
+	border-radius: 0.4rem;
+	padding: 0.5rem;
+	border: 1px solid gray;
+}
+
+.settings-desc {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	margin-bottom: 1rem;
+}
+
+.settings-desc p {
+	font-size: 1.5rem;
+	line-height: 1.1;
+	font-style: italic;
+}
+
+.start {
+	display: block;
+	margin: 0 auto;
+	border: 1px solid rgb(139, 79, 0);
+	padding: 5px;
+	border-radius: 5px;
+	margin-bottom: 25px;
+	background: rgba(131, 128, 25, 0.3);
+	cursor: pointer;
+}
+
+.result h2 {
+	margin-top: 5rem;
+	text-align: center;
+	font-size: 24px;
+}
