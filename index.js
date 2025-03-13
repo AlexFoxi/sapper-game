@@ -2,7 +2,7 @@ const createBoard = () => {
   const mines = Number(document.querySelector('.bomb').value);
   const size = Number(document.querySelector('.width').value);
   const gameBoard = document.querySelector('.board');
-  const res = document.querySelector('.result > h2');
+  const resultContainer = document.querySelector('.result');
   let flags = 0;
 
   if (mines > size * size) {
@@ -12,8 +12,8 @@ const createBoard = () => {
 
   // Reset game field
   gameBoard.style.pointerEvents = 'all';
-  gameBoard.style.gridTemplateColumns = `repeat(${size}, 3rem)`;
-  res.innerHTML = '';
+  gameBoard.style.gridTemplateColumns = `repeat(${size}, auto)`;
+  resultContainer.innerHTML = '';
 
   let board = [];
 
@@ -100,7 +100,7 @@ const createBoard = () => {
       cellElement.textContent = '';
     } else {
       cellElement.textContent = board[x][y].value;
-      cellElement.classList.add(`${board[x][y].value}`);
+      cellElement.classList.add(`_${board[x][y].value}`);
     }
   };
 
@@ -138,10 +138,12 @@ const createBoard = () => {
     if (flags < mines && board[x][y].flag !== true) {
       board[x][y].flag = true;
       cell.innerHTML = '🚩';
+      cell.classList.add('flag');
       flags++;
     } else if (board[x][y].flag === true) {
       board[x][y].flag = false;
       cell.innerHTML = '';
+      cell.classList.remove('flag');
       flags--;
     }
 
@@ -172,7 +174,9 @@ const createBoard = () => {
 
   function isWinAction(text) {
     gameBoard.style.pointerEvents = 'none';
-    res.innerHTML = text;
+    const h2 = document.createElement('h2');
+    resultContainer.appendChild(h2);
+    h2.textContent = text;
   }
 
   // Initialize and render the board
@@ -185,12 +189,13 @@ const createBoard = () => {
 };
 
 const inputValidate = () => {
-  const inputs = document.querySelectorAll('.game-settings input');
-  const forBombs = inputs[0];
-  const forWidth = inputs[1];
+  const [bombs, width, cellSize] = document.querySelectorAll(
+    '.game-settings input'
+  );
 
-  validateHelper(forBombs, 99);
-  validateHelper(forWidth, 10);
+  validateHelper(bombs, 99);
+  validateHelper(width, 20);
+  validateHelper(cellSize, 100);
 };
 
 function validateHelper(input, maxValue) {
@@ -201,6 +206,22 @@ function validateHelper(input, maxValue) {
   });
 }
 
-inputValidate();
+const resizeCell = () => {
+  const cellSizeInput = document.querySelector('input.cellSize');
 
-document.querySelector('.start').addEventListener('click', createBoard);
+  cellSizeInput.addEventListener('input', () => {
+    const gameBoard = document.querySelector('.board');
+    const val = cellSizeInput.value;
+
+    gameBoard.style.fontSize = val > 30 ? '14px' : `${val / 3}px`;
+    gameBoard.querySelectorAll('div').forEach((div) => {
+      div.style.width = `${val / 10}rem`;
+    });
+  });
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  inputValidate();
+  resizeCell();
+  document.querySelector('.start').addEventListener('click', createBoard);
+});

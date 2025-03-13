@@ -9,20 +9,40 @@
 }
 
 .cell {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
 	width: 3rem;
-	height: 3rem;
-	border: 1px solid #6d6d6d;
+	aspect-ratio: 1;
+	border: 1px solid #1E1E1E;
+
+	color: rgb(255, 205, 141);
+	font-size: 1.4em;
+	font-weight: 600;
+	line-height: 1;
 	text-align: center;
-	line-height: 3rem;
+
 	cursor: pointer;
 	box-shadow: inset 0 0 0 0.05rem #ccc;
 	transition: all 0.3s ease;
-	background: #e7e7e7;
+	background: #555555;
+
 }
 
 .cell.open {
-	background: #fff;
+	background: #ebebeb;
 	cursor: default;
+}
+
+.cell.boom {
+	background: #bd2727;
+	cursor: default;
+}
+
+.cell.flag {
+	padding-left: .4rem;
+	font-size: 1.7rem;
 }
 
 .cell:hover {
@@ -31,6 +51,38 @@
 
 .cell:active {
 	box-shadow: inset 0 0 0 0.35rem #ccc;
+}
+
+.cell._1 {
+	color: #4A90E2;
+}
+
+.cell._2 {
+	color: #50C878;
+}
+
+.cell._3 {
+	color: #E57373;
+}
+
+.cell._4 {
+	color: #A569BD;
+}
+
+.cell._5 {
+	color: #FF8C42;
+}
+
+.cell._6 {
+	color: #20B2AA;
+}
+
+.cell._7 {
+	color: #D32F2F;
+}
+
+.cell._8 {
+	color: #B0BEC5;
 }
 
 .game-settings {
@@ -67,15 +119,17 @@
 	display: block;
 	margin: 0 auto;
 	border: 1px solid rgb(139, 79, 0);
-	padding: 5px;
+	padding: 10px 15px;
 	border-radius: 5px;
 	margin-bottom: 25px;
 	background: rgba(131, 128, 25, 0.3);
 	cursor: pointer;
+	max-width: 200px;
+	width: 100%;
 }
 
 .result h2 {
-	margin-top: 5rem;
+	margin: 3rem 0 2rem;
 	text-align: center;
 	font-size: 24px;
 }
